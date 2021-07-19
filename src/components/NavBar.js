@@ -8,7 +8,7 @@ import {
   } from "react-router-dom";
   import React from 'react'
 import Actions from './action/Actions';
-import Clients from './Clients';
+import Clients from './client/Clients';
 import Analytics from './Analytics';
 
 

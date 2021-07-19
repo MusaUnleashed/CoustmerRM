@@ -3,22 +3,33 @@ import { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import { observer, inject } from 'mobx-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { fas } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import '../style/CustomerDisplay.css'
+import '../../style/CustomerDisplay.css'
+
+import ModalSelected from './ModalSelected'
 const CustomerDisplay = inject("CustomerStore")(observer((props) => {
     const [tableColumns, setTableColumns] = useState(["Name", "SureName", "Country", "FirstContact", "Email", "sold", "Owner"])
     const [data, setData] = useState([])
+    const[selectedCustomer,setSelectedCustomer]=useState({})
+    const[showAlert,setShowAlert]=useState(false);
+
     useEffect(() => {
         setData(props.CustomerStore.list)
         // setTableColumns(Object.keys(props.CustomerStore.list[0]))
     }, [])
-    const handleAlertModal = (e) => {
-        const song = e.target;
-        console.log('We need to get the details for ', song);
+    const handleAlertModal = (proxy) => {
+        const customer = Object.assign({}, proxy);
+        console.log(customer)
+        props.CustomerStore.handleAlertModalChange()
+        setShowAlert(!showAlert)
+        setSelectedCustomer(customer)
+    }
+    const handleUpdateCustmer=()=>{
+
     }
 
     return (
+        <div>
         <Table striped bordered hover variant="dark">
             <thead>
                 <tr className="keys-column">
@@ -29,8 +40,9 @@ const CustomerDisplay = inject("CustomerStore")(observer((props) => {
             </thead>
             <tbody>
                 {props.CustomerStore.list.map(customer =>
-                    <tr data-id="ll" onClick={handleAlertModal}  name={customer.id}>
-                        
+
+                    <tr onClick={() => { handleAlertModal(customer) }} >
+
                         <td>{customer.first}</td>
                         <td>{customer.last}</td>
                         <td>{customer.country}</td>
@@ -40,16 +52,19 @@ const CustomerDisplay = inject("CustomerStore")(observer((props) => {
                         <td>{customer.owner}</td>
 
 
-
-
-
                     </tr>
+
+
 
                 )}
 
             </tbody>
 
         </Table>
+
+        <ModalSelected customer={selectedCustomer}></ModalSelected>
+        </div>
+
     )
 }))
 

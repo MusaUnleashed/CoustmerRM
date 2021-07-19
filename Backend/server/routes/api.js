@@ -15,14 +15,19 @@ sequelize
 
 
 router.get('/clients',function(req,res){
+const from=req.query.from;
+const to =req.query.to
 sequelize.query(`
 SELECT * 
 From 
-client,owner,country
+client,owner,country,email_type
 WHERE
 client.owner_id=owner.id 
 AND
 client.country_id=country.id
+AND 
+client.email_type_id=email_type.id
+LIMIT ${from},${to}
 `
 )
 .then(function([results,metadata]){
