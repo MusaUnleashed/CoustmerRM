@@ -7,16 +7,13 @@ const ModalSelected = inject("CustomerStore")(observer((props) => {
 
     const [selectedCustomer, setSelectedCustomer] = useState({})
     useEffect(() => {
+        // console.log("-------------------------------new---------------------")
         setSelectedCustomer(props.customer)
-    }, [])
+        // console.log(selectedCustomer)
+    },[props.customer])
 
 
-    useEffect(() => {
-        return ()=>{
-            setSelectedCustomer({})
-
-        }
-    },[])
+  
     const handleChange = (e) => {
         console.log(e.target.value)
         setSelectedCustomer({
@@ -25,13 +22,26 @@ const ModalSelected = inject("CustomerStore")(observer((props) => {
         })
 
     }
-    const handleSubmit=()=>{
+    const handleSubmit=()=>{// this should call handle update in our store 
+
+        console.log("-------after change=====",selectedCustomer)
+        const customerToUpdate={ 
+            id:selectedCustomer.id,
+            first:selectedCustomer.first,
+            last:selectedCustomer.last,
+            country:selectedCustomer.country
+        }
+        props.CustomerStore.updateSelectedCustomer(customerToUpdate)
+
+    }
+    const handleCancel=()=>{
+
     }
     return (
         <div>
             <Modal show={props.CustomerStore.showModal} onHide={props.CustomerStore.handleAlertModalChange}>
                 <Modal.Header >
-                    <Modal.Title>{"mosa"} </Modal.Title>
+                    <Modal.Title>{"hi What would you like to change "} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div>
@@ -47,8 +57,12 @@ const ModalSelected = inject("CustomerStore")(observer((props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleSubmit}>
-                        Close
+                        submit
                     </Button>
+
+                    <Button variant="primary" onClick={handleCancel}>
+                    cancel
+                </Button>
                 </Modal.Footer>
             </Modal>
         </div>

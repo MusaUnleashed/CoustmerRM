@@ -14,7 +14,7 @@ const CustomerDisplay = inject("CustomerStore")(observer((props) => {
     const[showAlert,setShowAlert]=useState(false);
 
     useEffect(() => {
-        setData(props.CustomerStore.list)
+        // setData(props.CustomerStore.list)
         // setTableColumns(Object.keys(props.CustomerStore.list[0]))
     }, [])
     const handleAlertModal = (proxy) => {
@@ -24,7 +24,7 @@ const CustomerDisplay = inject("CustomerStore")(observer((props) => {
         setShowAlert(!showAlert)
         setSelectedCustomer(customer)
     }
-    const handleUpdateCustmer=()=>{
+    const handleUpdateCustomer=()=>{
 
     }
 
@@ -39,9 +39,9 @@ const CustomerDisplay = inject("CustomerStore")(observer((props) => {
 
             </thead>
             <tbody>
-                {props.CustomerStore.list.map(customer =>
+                {props.CustomerStore.list.map((customer,index )=>
 
-                    <tr onClick={() => { handleAlertModal(customer) }} >
+                    <tr  key={index} onClick={() => { handleAlertModal(customer) }} >
 
                         <td>{customer.first}</td>
                         <td>{customer.last}</td>
@@ -52,17 +52,17 @@ const CustomerDisplay = inject("CustomerStore")(observer((props) => {
                         <td>{customer.owner}</td>
 
 
-                    </tr>
-
-
-
-                )}
+                        </tr>
+                        
+                        
+                        
+                        )}
+                        <ModalSelected   customer={selectedCustomer}></ModalSelected>
 
             </tbody>
 
         </Table>
 
-        <ModalSelected customer={selectedCustomer}></ModalSelected>
         </div>
 
     )
