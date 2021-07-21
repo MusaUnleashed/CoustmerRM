@@ -7,7 +7,6 @@ const ModalSelected = inject("CustomerStore")(observer((props) => {
 
     const [selectedCustomer, setSelectedCustomer] = useState({})
     useEffect(() => {
-        // console.log("-------------------------------new---------------------")
         setSelectedCustomer(props.customer)
         // console.log(selectedCustomer)
     },[props.customer])
@@ -45,12 +44,12 @@ const ModalSelected = inject("CustomerStore")(observer((props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        <span>Name</span><input name="first" value={selectedCustomer.first} onChange={handleChange}></input>
+                        <span>Name</span><input name="first" value={selectedCustomer.first || ""} onChange={handleChange}></input>
                         <br></br>
-                        <span>SurName</span><input name="last" value={selectedCustomer.last} onChange={handleChange}></input>
+                        <span>SurName</span><input name="last" value={selectedCustomer.last|| ""} onChange={handleChange}></input>
                         <br></br>
 
-                        <span>Country</span><input name="country" value={selectedCustomer.country} onChange={handleChange}></input>
+                        <span>Country</span><input name="country" value={selectedCustomer.country|| ""} onChange={handleChange}></input>
 
                     </div>
 

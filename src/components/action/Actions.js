@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import UpdateClient from './UpdateClient'
+import { observer, inject } from 'mobx-react'
+import AddClient from './AddClient'
 
-function Actions() {
+const Actions = inject("CustomerStore")(observer((props) => {
+
+    useEffect(() => {
+        props.CustomerStore.getOwners()
+        console.log(props.CustomerStore.owners)
+    }, [])
+
     return (
-       <div>
-       <UpdateClient></UpdateClient>
-       </div>
+        <div>
+            <UpdateClient></UpdateClient>
+
+            <AddClient></AddClient>
+        </div>
     )
-}
+}))
 
 export default Actions

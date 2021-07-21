@@ -33,7 +33,7 @@ const CustomerDisplay = inject("CustomerStore")(observer((props) => {
         <Table striped bordered hover variant="dark">
             <thead>
                 <tr className="keys-column">
-                    {tableColumns.map(d => <td>{d}</td>)}
+                    {tableColumns.map(d => <td key={d}>{d}</td>)}
 
                 </tr>
 
@@ -41,15 +41,15 @@ const CustomerDisplay = inject("CustomerStore")(observer((props) => {
             <tbody>
                 {props.CustomerStore.list.map((customer,index )=>
 
-                    <tr  key={index} onClick={() => { handleAlertModal(customer) }} >
+                    <tr  key={index+customer.first} onClick={() => { handleAlertModal(customer) }} >
 
-                        <td>{customer.first}</td>
-                        <td>{customer.last}</td>
-                        <td>{customer.country}</td>
-                        <td>{customer.date}</td>
-                        <td>{customer.emailType}</td>
-                        <td>{customer.sold ? <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon> : null}</td>
-                        <td>{customer.owner}</td>
+                        <td key={index+"f"}>{customer.first}</td>
+                        <td key={index+"l"}>{customer.last}</td>
+                        <td key={index+"c"}>{customer.country}</td>
+                        <td key={index+"d"}>{customer.date}</td>
+                        <td key={index+"e"}>{customer.email_type}</td>
+                        <td key={index+"s"}>{customer.sold ==1 ? <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon> : null}</td>
+                        <td key={index+"o"}>{customer.owner}</td>
 
 
                         </tr>
@@ -57,11 +57,11 @@ const CustomerDisplay = inject("CustomerStore")(observer((props) => {
                         
                         
                         )}
+                        
+                        </tbody>
+                        
+                        </Table>
                         <ModalSelected   customer={selectedCustomer}></ModalSelected>
-
-            </tbody>
-
-        </Table>
 
         </div>
 

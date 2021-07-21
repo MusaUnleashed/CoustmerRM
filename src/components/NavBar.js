@@ -9,7 +9,7 @@ import {
   import React from 'react'
 import Actions from './action/Actions';
 import Clients from './client/Clients';
-import Analytics from './Analytics';
+import Analytics from './Analtics/Analytics';
 
 
 function NavBar() {

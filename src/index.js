@@ -13,9 +13,8 @@ const store={
 }
 
 ReactDOM.render(
-  <React.StrictMode>
   <Provider {...store}> <App /></Provider>
-  </React.StrictMode>,
+ ,
   document.getElementById('root')
 );
 
