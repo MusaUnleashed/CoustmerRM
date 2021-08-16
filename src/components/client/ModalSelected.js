@@ -23,7 +23,6 @@ const ModalSelected = inject("CustomerStore")(observer((props) => {
     }
     const handleSubmit=()=>{// this should call handle update in our store 
 
-        console.log("-------after change=====",selectedCustomer)
         const customerToUpdate={ 
             id:selectedCustomer.id,
             first:selectedCustomer.first,
